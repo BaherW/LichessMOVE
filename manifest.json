@@ -1,0 +1,6 @@
+{
+    "name": "Lichess Move!",
+    "version": "1.0",
+    "description": "My friends screaming at you if you take too long to move",
+    "manifest_version": 2
+  }
