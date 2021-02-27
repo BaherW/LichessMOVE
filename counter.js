@@ -25,6 +25,9 @@ function saveChanges() {
     // Save it using the Chrome extension storage API.
     chrome.storage.sync.set({ 'username': username, 'waitTime': waitTime }, function () {
     });
+
+    console.log(username)
+    console.log(waitTime)
 }
 
 document.getElementById("saveButton").addEventListener("click", function () { saveChanges() })
@@ -52,8 +55,6 @@ function main() {
             else {
                 currentMoveColor = "black";
             }
-
-
 
             if (currentMoveColor === userColor) {
                 timer++;

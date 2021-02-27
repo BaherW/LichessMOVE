@@ -1,0 +1,27 @@
+body {
+    background-color: #C3E0E5;
+    padding: 1rem;
+    width: 11rem;
+    height: 11rem;
+}
+
+.form {
+    padding-left: 0.25rem;
+}
+
+.form input {
+    margin-bottom: 1rem;
+}
+
+
+.button {
+    background-color: #201E50;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    margin-left: 3.5rem;
+}
