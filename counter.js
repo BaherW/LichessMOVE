@@ -77,7 +77,7 @@ function gameExists() {
 }
 
 function fetchData() {
-    fetch("https://lichess.org/api/user/BahrW/current-game", {
+    fetch("https://lichess.org/api/user/" + username +"/current-game", {
         method: 'GET',
         headers: {
             "Accept": "application/json",
