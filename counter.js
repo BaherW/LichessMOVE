@@ -36,6 +36,9 @@ function main() {
     var userColor;
     var currentMoveColor;
     var timer = 0;
+
+    //var pickedSound = new Audio(chrome.runtime.getURL("./Audio/"));
+    //let randomChoice = 0;
     setInterval(() => {
         fetchData();
 
@@ -63,6 +66,10 @@ function main() {
                 timer = 0;
             }
             if (timer == waitTime) {
+                //randomChoice = Math.floor(Math.random() * numberhere);
+                //pickedSound =  new Audio(chrome.runtime.getURL("./Audio/recording"+randomChoice))
+                
+                Audio.play();
                 console.log("move idiot")
             }
         }
