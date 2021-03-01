@@ -5,6 +5,7 @@ var audioArray = ["bahr1", "bahr2", "bahr3", "bahr4"]
 var lichessOpen = true;
 
 var deactivation = false;
+var alreadyOpened = false;
 
 function syncVars() {
     setInterval(() => {
@@ -28,7 +29,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             console.log("found")
         }
     }
-    if (openedLichessInstances > 0) {
+    if (openedLichessInstances > 0 && !alreadyOpened) {
         ourMain();
     }
 })
@@ -37,7 +38,6 @@ chrome.tabs.onRemoved.addListener(function (tabId, changeInfo, tab) {
     console.log(openURLS[tabId])
     if (openURLS[tabId].includes("lichess")) {
         openedLichessInstances--
-        console.log("notFound")
     }
     if (openedLichessInstances == 0) {
         deactivation = true;
@@ -52,6 +52,7 @@ function isLichessOpen() {
 }
 
 function ourMain() {
+    alreadyOpened = true;
     let userColor;
     let currentMoveColor;
     let timer = 0;
@@ -59,6 +60,7 @@ function ourMain() {
         if (deactivation) {
             console.log("stop");
             clearInterval(timing);
+            alreadyOpened = false;
             return
         }
         syncVars();
@@ -74,7 +76,7 @@ function ourMain() {
 
             let moves = (gameData.moves).split(" ")
             let movesLength = moves.length;
-            console.log(movesLength)
+            console.warn(movesLength)
             if (movesLength % 2 == 0) {
                 currentMoveColor = "white"
             }
@@ -83,7 +85,7 @@ function ourMain() {
             }
 
             if (currentMoveColor === userColor) {
-                console.log(timer)
+                console.debug(timer)
                 timer++;
             }
             else {
