@@ -26,7 +26,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         openURLS[tabId] = changeInfo.url;
         if (openURLS[tabId].includes("lichess")) {
             openedLichessInstances++;
-            console.log("found")
+            console.log("opened Urls" + openURLS)
+            console.log("Instances: " + openedLichessInstances)
         }
     }
     if (openedLichessInstances > 0 && !alreadyOpened) {
@@ -38,6 +39,7 @@ chrome.tabs.onRemoved.addListener(function (tabId, changeInfo, tab) {
     console.log(openURLS[tabId])
     if (openURLS[tabId].includes("lichess")) {
         openedLichessInstances--
+        openURLS.splice(tabId, 1);
     }
     if (openedLichessInstances == 0) {
         deactivation = true;
@@ -61,18 +63,19 @@ function ourMain() {
             console.log("stop");
             clearInterval(timing);
             alreadyOpened = false;
+            deactivation = false;
             return
         }
         syncVars();
         fetchData();
-        console.log(gameData)
+        console.log("fetching")
         if (gameExists()) {
             console.log(username)
             if (gameData.players.white == username) {
-                userColor = "black"
+                userColor = "white"
             }
             else {
-                userColor = "white"
+                userColor = "black"
             }
 
             let moves = (gameData.moves).split(" ")
@@ -86,7 +89,7 @@ function ourMain() {
                 currentMoveColor = "black";
                 console.log("This idiots turn to move")
             }
-            
+
             if (currentMoveColor == userColor) {
                 timer++;
                 console.log("You are " + userColor)
