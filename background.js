@@ -65,35 +65,41 @@ function ourMain() {
         }
         syncVars();
         fetchData();
-        console.log("Fetching")
+        console.log(gameData)
         if (gameExists()) {
+            console.log(username)
             if (gameData.players.white == username) {
-                userColor = "white"
+                userColor = "black"
             }
             else {
-                userColor = "black"
+                userColor = "white"
             }
 
             let moves = (gameData.moves).split(" ")
             let movesLength = moves.length;
-            console.warn(movesLength)
+            console.warn("Moves length is: " + movesLength)
             if (movesLength % 2 == 0) {
                 currentMoveColor = "white"
+                console.log("My turn to move")
             }
             else {
                 currentMoveColor = "black";
+                console.log("This idiots turn to move")
             }
-
-            if (currentMoveColor === userColor) {
-                console.debug(timer)
+            
+            if (currentMoveColor == userColor) {
                 timer++;
+                console.log("You are " + userColor)
+                console.log("Current move color is " + currentMoveColor)
+                console.log("Waiting on your move")
+                if (timer == waitTime) {
+                    var audio = new Audio(getRandomPath());
+                    audio.play();
+                }
             }
             else {
+                console.log("Waiting on oponnent move")
                 timer = 0;
-            }
-            if (timer == waitTime) {
-                var audio = new Audio(getRandomPath());
-                audio.play();
             }
         }
     }, 1000)
@@ -107,7 +113,7 @@ function gameExists() {
 }
 
 function fetchData() {
-    fetch("https://lichess.org/api/user/BahrW/current-game", {
+    fetch("https://lichess.org/api/user/" + username + "/current-game", {
         method: 'GET',
         headers: {
             "Accept": "application/json",
