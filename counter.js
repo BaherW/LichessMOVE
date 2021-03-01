@@ -14,6 +14,9 @@ function saveChanges() {
         document.getElementById("username").placeholder = localusername;
     }
     if (localwaitTime) {
+        if (localwaitTime < 5) {
+            localwaitTime = 5;
+        }
         chrome.storage.sync.set({'waitTime': localwaitTime }, function () {
         });
         document.getElementById("waitTime").placeholder = localwaitTime;
