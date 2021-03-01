@@ -5,16 +5,37 @@ console.log("We in here baby")
 
 function saveChanges() {
     // Get a value saved in a form.
-    var username = document.getElementById("username").value;
-    var waitTime = document.getElementById("waitTime").value;
+    let localusername = document.getElementById("username").value;
+    let localwaitTime = document.getElementById("waitTime").value;
     // Check that there's some code there.
-    if (!username || !waitTime) {
-        message('Error: No value specified');
-        return;
+    if (localusername) {
+        chrome.storage.sync.set({ 'username': localusername}, function () {
+        });
+        document.getElementById("username").placeholder = localusername;
     }
-    // Save it using the Chrome extension storage API.
-    chrome.storage.sync.set({ 'username': username, 'waitTime': waitTime }, function () {
-    });
+    if (localwaitTime) {
+        chrome.storage.sync.set({'waitTime': localwaitTime }, function () {
+        });
+        document.getElementById("waitTime").placeholder = localwaitTime;
+    }   
 }
 
 document.getElementById("saveButton").addEventListener("click", function () { saveChanges() })
+
+function syncVars() {
+    chrome.storage.sync.get(["username", "waitTime"], function (results) {
+        username = results.username
+        waitTime = results.waitTime
+        if (username == undefined) {
+            username = ""
+        }
+        if (waitTime == undefined) {
+            document.getElementById("waitTime").placeholder = "Seconds";
+            return;
+        }
+        document.getElementById("username").placeholder = username;
+        document.getElementById("waitTime").placeholder = waitTime;
+    })
+}
+
+syncVars()

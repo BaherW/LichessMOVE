@@ -1,24 +1,32 @@
 {
-    "name": "Lichess Move!",
-    "version": "1.0",
-    "description": "My friends screaming at you if you take too long to move",
-    "manifest_version": 2,
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
-      },
-    "permissions": [
-        "storage",
-        "tabs"
+  "name": "Lichess Move!",
+  "version": "1.0",
+  "description": "My friends screaming at you if you take too long to move",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
     ],
-    "content_scripts": [
-        {
-          "matches": ["*://*.lichess.org/*"],
-          "js": ["counter.js"]
-        }
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.lichess.org/*"
       ],
-
-    "browser_action": {
-        "default_popup": "settings.html"
+      "js": [
+        "counter.js"
+      ]
     }
+  ],
+  "browser_action": {
+    "default_popup": "settings.html"
+  },
+  "icons": {
+    "128": "icons/LichessMOVE.png"
   }
+}
