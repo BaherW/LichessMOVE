@@ -1,7 +1,7 @@
 var username
 var waitTime
 var gameData
-var audioArray = ["bahr1", "bahr2", "bahr3", "bahr4"]
+var audioArray = ["bahr1", "bahr2", "bahr3", "oscar1", "oscar2", "oscar3", "oscar4", "oscar5"]
 var lichessOpen = true;
 
 var deactivation = false;
@@ -62,7 +62,6 @@ function ourMain() {
 
     let timing = setInterval(() => {
         if (deactivation) {
-            console.log("stop");
             clearInterval(timing);
             alreadyOpened = false;
             deactivation = false;
@@ -87,7 +86,6 @@ function ourMain() {
 
             let moves = (gameData.moves).split(" ");
             numMoves = moves.length;
-            console.log("Nummoves is: " + numMoves)
             
             if (numMoves > 5) {
                 numMoves += 1;
@@ -95,14 +93,14 @@ function ourMain() {
             if (moves.length > 5 && moves.length < 9) {
                 timer = Infinity;
             }
-            console.log("Number of moves played is: " + moves)
+            
             if (numMoves % 2 == 0 || gameData.moves.length == 0) {
                 currentMoveColor = "white";
             }
             else {
                 currentMoveColor = "black"
             }
-            console.log(currentMoveColor);
+            
 
             if (currentMoveColor == userColor && (numMoves == moveError)) {
                 timer += 0.5;
@@ -110,7 +108,7 @@ function ourMain() {
             else {
                 timer = 0
             }
-            console.log("Timer is: " + timer)
+            
             if (timer == waitTime) {
                 playAudio();
             }
@@ -144,11 +142,21 @@ function fetchData() {
         })
 }
 
+var prevVoice = []
 function getRandomPath() {
     let initial = "moveAudios/"
-    let end = ".mp4"
+    let end = ".mp3"
     let name = audioArray[Math.floor(Math.random() * audioArray.length)];
 
+    if (prevVoice.length == 4) {
+        prevVoice = [];
+    }
+
+    while (prevVoice.includes(name)) {
+        name = audioArray[Math.floor(Math.random() * audioArray.length)];
+    }
+    
+    prevVoice.push(name);
     return (initial + name + end)
 }
 
