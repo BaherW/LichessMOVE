@@ -1,7 +1,7 @@
 var username
 var waitTime
 var gameData
-var audioArray = ["bahr1", "bahr2", "bahr3", "oscar1", "oscar2", "oscar3", "oscar4", "oscar5"]
+var audioArray = ["bahr1", "bahr2", "bahr3", "oscar1", "oscar2", "oscar3", "oscar4", "oscar5", "alex1" , "alex2" , "alex3", "alex4" , "alex5", "alex6", 'alex7', 'alex8' , 'alex9', 'alex10', 'beattie1', 'beattie2','beattie3','beattie4', 'beattie5', 'beattie6', 'beattie7', 'beattie8', 'beattie9']
 var lichessOpen = true;
 
 var deactivation = false;
